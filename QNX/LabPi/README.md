@@ -1,2 +1,0 @@
- Multithreaded-Programming-QNX-RTOS
-
