@@ -1,8 +1,13 @@
 /*----------------------------------------------------------------------------
  *      RL-ARM - RTX
  *----------------------------------------------------------------------------
+<<<<<<< HEAD
  *      Name:    Serial.C
  *      Author:  Farid Mabrouk
+=======
+ *      Name:   SpeedControl.C
+ *      Author: Farid Mabrouk
+>>>>>>> ed1a29f8119d8deab092432eb64a9c314685d14c
  *      Purpose: RTX example program
  *----------------------------------------------------------------------------
  *      This code is part of the RealView Run-Time Library.
@@ -15,15 +20,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+<<<<<<< HEAD
 
 #define __TRUE    1
 #define __FALSE   0
 
 
+=======
+>>>>>>> ed1a29f8119d8deab092432eb64a9c314685d14c
 /*----------------------------------------------------------------------------
  *       serial_init: initialize serial interface
  *---------------------------------------------------------------------------*/
 void serial_init (void) {
+<<<<<<< HEAD
 	
 	//UART1
 	PINSEL0 |= 0x40000000;                  /*  Enable TxD1 in  P0.15         */
@@ -53,6 +62,27 @@ unsigned char sendchar (unsigned char character){
 		}
 		
 	 return (result);
+=======
+
+	//UART1
+	PINSEL0 |= 0x40000000;                /*  Enable TxD1 in  P0.15   */
+	PINSEL1 |= 0x00000001;                 /*  Enable RxD1 in P0.16   */
+	U1LCR = 0x83;                          /* 8 bits, no Parity, 1 Stop bit */
+	U1DLM = 0x00;
+	U1DLL = 78;                             /* 9600 Baud Rate @ 12MHz Clock */
+	U1FDR   = 0;                            /* Fractional divider not used     */
+	U1LCR = 0x03;                           /* DLAB = 0 */
+	U1FCR = 0x07;                           /* enable TX amp RX FIFO ,clears TX amp RX FIFO */
+}
+
+char sendchar (char character){
+	
+	 char c;  
+	 c=character;
+	 
+	 while (!(U1LSR & 0x20)){};	
+	 return (U1THR=c);
+>>>>>>> ed1a29f8119d8deab092432eb64a9c314685d14c
 }
 void SendInteger (int integer){
 	
@@ -73,6 +103,7 @@ void SendInteger (int integer){
     x %= div_val;
     div_val /= 10;
    }while(div_val);	
+<<<<<<< HEAD
 }
 void printString(unsigned char *ptr)
 {
@@ -93,3 +124,6 @@ void printString(unsigned char *ptr)
     while (*ptr!=0);
 }
 
+=======
+}
+>>>>>>> ed1a29f8119d8deab092432eb64a9c314685d14c

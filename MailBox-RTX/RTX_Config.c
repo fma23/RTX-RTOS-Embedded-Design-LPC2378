@@ -12,7 +12,10 @@
 #include <RTL.h>
 #include <LPC23xx.H>                     /* LPC23xx definitions              */
 
+<<<<<<< HEAD
 extern void ADC_init(void);
+=======
+>>>>>>> ed1a29f8119d8deab092432eb64a9c314685d14c
 /*----------------------------------------------------------------------------
  *      RTX User configuration part BEGIN
  *---------------------------------------------------------------------------*/
@@ -34,7 +37,11 @@ extern void ADC_init(void);
 //   <i> The memory space for the stack is provided by the user.
 //   <i> Default: 0
 #ifndef OS_PRIVCNT
+<<<<<<< HEAD
 #define OS_PRIVCNT     1
+=======
+ #define OS_PRIVCNT     1
+>>>>>>> ed1a29f8119d8deab092432eb64a9c314685d14c
 #endif
 
 //   <o>Task stack size [bytes] <20-4096:8><#/4>
@@ -191,7 +198,11 @@ __task void os_idle_demon (void) {
 
  for (;;) {
   /* HERE: include optional user code to be executed when no task runs.*/
+<<<<<<< HEAD
 //		  ADC_init();
+=======
+
+>>>>>>> ed1a29f8119d8deab092432eb64a9c314685d14c
   }
 }
 
