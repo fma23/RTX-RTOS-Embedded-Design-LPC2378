@@ -25,13 +25,13 @@
 #define SPEED_DOWN     0x03
 #define IDLE           0x04
 
-static unsigned int delay_constant; 
-static float  temp0,temp1,temp2,temp3; 
-volatile static unsigned int flag,j;
-volatile static char next_state;
-volatile static unsigned int total_steps=4200;
-volatile static	unsigned int denom;
-volatile static unsigned int step;
+volatile unsigned int delay_constant=0; 
+volatile float  temp0,temp1,temp2,temp3; 
+volatile unsigned int flag,j;
+volatile unisgned char next_state;
+volatile unsigned int total_steps=4200;
+volatile unsigned int denom;
+volatile unsigned int step;
 
 /* Function that turns on requested LED                                       */
 void LED_On (unsigned int num) 
@@ -97,7 +97,9 @@ void SetupTimerInterrupt(void )
   T0MCR         = 3;                             /* Interrupt and Reset on MR0  */
   VICVectAddr4  = (unsigned long ) T0_IRQHandler;/* Set Interrupt Vector        */
   VICVectCntl4  = 15;                            /* use it for Timer0 Interrupt */
-  VICIntEnable  = (1  << 4);	
+  VICIntEnable  = (1  << 4);
+  T0TCR         = 1;                             /* Timer0 Enable               */
+  T0MR0         = delay_constant;
 }
 void Calculate_C0()
 {
@@ -128,6 +130,9 @@ int main (void)
 	
    T0TCR         = 1;                             /* Timer0 Enable               */
    T0MR0         = delay_constant;
+	
+   SetupTimerInterrupt();
+	
    next_state=0x1;
 	
   while(1)
